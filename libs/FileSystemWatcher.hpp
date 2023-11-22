@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <thread>
 #include <atomic>
+#include "Logger.hpp"
 
 class FileSystemWatcher {
     Logger logger;
