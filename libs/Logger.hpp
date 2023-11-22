@@ -34,7 +34,7 @@ public:
         return logFilename;
     }
 
-    void addLog(const std::string& message)
+    void log(const std::string& message)
     {
         auto now = std::chrono::system_clock::now();
         std::time_t time = std::chrono::system_clock::to_time_t(now);

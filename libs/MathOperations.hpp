@@ -17,7 +17,7 @@ private:
     {
         if (matrixA.size() == 0 || matrixA.size() != matrixB.size() || matrixA[0].size() != matrixB[0].size())
         {
-            logger.addLog("Matrix " + operation + " failed: Incompatible dimensions");
+            logger.log("Matrix " + operation + " failed: Incompatible dimensions");
             throw std::invalid_argument("Incompatible matrix dimensions for " + operation);
         }
     }
@@ -25,7 +25,7 @@ private:
 public:
     MathOperations()
     {
-        logger.addLog("MathOperations instance created");
+        logger.log("MathOperations instance created");
     }
 
     // Matrix addition
@@ -41,7 +41,7 @@ public:
                 result[i][j] = matrixA[i][j] + matrixB[i][j];
             }
         }
-        logger.addLog("Matrix addition successful");
+        logger.log("Matrix addition successful");
         return result;
     }
 
@@ -58,7 +58,7 @@ public:
                 result[i][j] = matrixA[i][j] - matrixB[i][j];
             }
         }
-        logger.addLog("Matrix subtraction successful");
+        logger.log("Matrix subtraction successful");
         return result;
     }
 
@@ -67,12 +67,12 @@ public:
     {
         if (data.empty())
         {
-            logger.addLog("Mean calculation failed: Empty data vector");
+            logger.log("Mean calculation failed: Empty data vector");
             throw std::invalid_argument("Data vector is empty");
         }
         double sum = std::accumulate(data.begin(), data.end(), 0.0);
         double mean = sum / data.size();
-        logger.addLog("Mean calculation successful");
+        logger.log("Mean calculation successful");
         return mean;
     }
 
@@ -81,7 +81,7 @@ public:
     {
         if (data.empty())
         {
-            logger.addLog("Variance calculation failed: Empty data vector");
+            logger.log("Variance calculation failed: Empty data vector");
             throw std::invalid_argument("Data vector is empty");
         }
         double meanValue = mean(data);
@@ -91,7 +91,7 @@ public:
             sum += (elem - meanValue) * (elem - meanValue);
         }
         double variance = sum / data.size();
-        logger.addLog("Variance calculation successful");
+        logger.log("Variance calculation successful");
         return variance;
     }
 
@@ -100,12 +100,12 @@ public:
     {
         if (data.empty())
         {
-            logger.addLog("Standard deviation calculation failed: Empty data vector");
+            logger.log("Standard deviation calculation failed: Empty data vector");
             throw std::invalid_argument("Data vector is empty");
         }
         double varianceValue = variance(data);
         double standardDeviation = std::sqrt(varianceValue);
-        logger.addLog("Standard deviation calculation successful");
+        logger.log("Standard deviation calculation successful");
         return standardDeviation;
     }
 
@@ -114,12 +114,12 @@ public:
     {
         if (dataA.empty() || dataB.empty())
         {
-            logger.addLog("Covariance calculation failed: Empty data vector");
+            logger.log("Covariance calculation failed: Empty data vector");
             throw std::invalid_argument("Data vector is empty");
         }
         if (dataA.size() != dataB.size())
         {
-            logger.addLog("Covariance calculation failed: Incompatible data vectors");
+            logger.log("Covariance calculation failed: Incompatible data vectors");
             throw std::invalid_argument("Data vectors are not of equal size");
         }
         double meanA = mean(dataA);
@@ -130,7 +130,7 @@ public:
             sum += (dataA[i] - meanA) * (dataB[i] - meanB);
         }
         double covariance = sum / dataA.size();
-        logger.addLog("Covariance calculation successful");
+        logger.log("Covariance calculation successful");
         return covariance;
     }
 
@@ -139,19 +139,19 @@ public:
     {
         if (dataA.empty() || dataB.empty())
         {
-            logger.addLog("Correlation coefficient calculation failed: Empty data vector");
+            logger.log("Correlation coefficient calculation failed: Empty data vector");
             throw std::invalid_argument("Data vector is empty");
         }
         if (dataA.size() != dataB.size())
         {
-            logger.addLog("Correlation coefficient calculation failed: Incompatible data vectors");
+            logger.log("Correlation coefficient calculation failed: Incompatible data vectors");
             throw std::invalid_argument("Data vectors are not of equal size");
         }
         double covarianceValue = covariance(dataA, dataB);
         double standardDeviationA = standardDeviation(dataA);
         double standardDeviationB = standardDeviation(dataB);
         double correlationCoefficient = covarianceValue / (standardDeviationA * standardDeviationB);
-        logger.addLog("Correlation coefficient calculation successful");
+        logger.log("Correlation coefficient calculation successful");
         return correlationCoefficient;
     }
 
@@ -160,12 +160,12 @@ public:
     {
         if (dataA.empty() || dataB.empty())
         {
-            logger.addLog("Dot product calculation failed: Empty data vector");
+            logger.log("Dot product calculation failed: Empty data vector");
             throw std::invalid_argument("Data vector is empty");
         }
         if (dataA.size() != dataB.size())
         {
-            logger.addLog("Dot product calculation failed: Incompatible data vectors");
+            logger.log("Dot product calculation failed: Incompatible data vectors");
             throw std::invalid_argument("Data vectors are not of equal size");
         }
         double sum = 0.0;
@@ -173,7 +173,7 @@ public:
         {
             sum += dataA[i] * dataB[i];
         }
-        logger.addLog("Dot product calculation successful");
+        logger.log("Dot product calculation successful");
         return sum;
     }
 
@@ -182,19 +182,19 @@ public:
     {
         if (dataA.empty() || dataB.empty())
         {
-            logger.addLog("Cross product calculation failed: Empty data vector");
+            logger.log("Cross product calculation failed: Empty data vector");
             throw std::invalid_argument("Data vector is empty");
         }
         if (dataA.size() != 3 || dataB.size() != 3)
         {
-            logger.addLog("Cross product calculation failed: Incompatible data vectors");
+            logger.log("Cross product calculation failed: Incompatible data vectors");
             throw std::invalid_argument("Data vectors are not of size 3");
         }
         std::vector<double> result(3, 0);
         result[0] = dataA[1] * dataB[2] - dataA[2] * dataB[1];
         result[1] = dataA[2] * dataB[0] - dataA[0] * dataB[2];
         result[2] = dataA[0] * dataB[1] - dataA[1] * dataB[0];
-        logger.addLog("Cross product calculation successful");
+        logger.log("Cross product calculation successful");
         return result;
     }
 
@@ -203,11 +203,11 @@ public:
     {
         if (matrix.size() != 2 || matrix[0].size() != 2)
         {
-            logger.addLog("Determinant calculation failed: Incompatible matrix dimensions");
+            logger.log("Determinant calculation failed: Incompatible matrix dimensions");
             throw std::invalid_argument("Matrix is not of size 2x2");
         }
         double determinant = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-        logger.addLog("Determinant calculation successful");
+        logger.log("Determinant calculation successful");
         return determinant;
     }
 
@@ -216,13 +216,13 @@ public:
     {
         if (matrix.size() != 2 || matrix[0].size() != 2)
         {
-            logger.addLog("Inverse calculation failed: Incompatible matrix dimensions");
+            logger.log("Inverse calculation failed: Incompatible matrix dimensions");
             throw std::invalid_argument("Matrix is not of size 2x2");
         }
         double det = determinant(matrix);
         if (det == 0)
         {
-            logger.addLog("Inverse calculation failed: Determinant is zero");
+            logger.log("Inverse calculation failed: Determinant is zero");
             throw std::invalid_argument("Determinant is zero");
         }
         std::vector<std::vector<double>> result(2, std::vector<double>(2, 0));
@@ -230,7 +230,7 @@ public:
         result[0][1] = -matrix[0][1] / det;
         result[1][0] = -matrix[1][0] / det;
         result[1][1] = matrix[0][0] / det;
-        logger.addLog("Inverse calculation successful");
+        logger.log("Inverse calculation successful");
         return result;
     }
 
@@ -239,7 +239,7 @@ public:
     {
         if (matrix.size() == 0)
         {
-            logger.addLog("Transpose calculation failed: Empty matrix");
+            logger.log("Transpose calculation failed: Empty matrix");
             throw std::invalid_argument("Matrix is empty");
         }
         std::vector<std::vector<double>> result(matrix[0].size(), std::vector<double>(matrix.size(), 0));
@@ -250,7 +250,7 @@ public:
                 result[j][i] = matrix[i][j];
             }
         }
-        logger.addLog("Transpose calculation successful");
+        logger.log("Transpose calculation successful");
         return result;
     }
 
@@ -259,12 +259,12 @@ public:
     {
         if (matrix.size() == 0)
         {
-            logger.addLog("Trace calculation failed: Empty matrix");
+            logger.log("Trace calculation failed: Empty matrix");
             throw std::invalid_argument("Matrix is empty");
         }
         if (matrix.size() != matrix[0].size())
         {
-            logger.addLog("Trace calculation failed: Incompatible matrix dimensions");
+            logger.log("Trace calculation failed: Incompatible matrix dimensions");
             throw std::invalid_argument("Matrix is not square");
         }
         double trace = 0.0;
@@ -272,7 +272,7 @@ public:
         {
             trace += matrix[i][i];
         }
-        logger.addLog("Trace calculation successful");
+        logger.log("Trace calculation successful");
         return trace;
     }
 
@@ -281,7 +281,7 @@ public:
     {
         if (matrix.size() == 0)
         {
-            logger.addLog("Rank calculation failed: Empty matrix");
+            logger.log("Rank calculation failed: Empty matrix");
             throw std::invalid_argument("Matrix is empty");
         }
         size_t rank = 0;
@@ -324,7 +324,7 @@ public:
                 ++rank;
             }
         }
-        logger.addLog("Rank calculation successful");
+        logger.log("Rank calculation successful");
         return rank;
     }
 

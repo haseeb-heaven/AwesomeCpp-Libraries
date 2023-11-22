@@ -45,7 +45,7 @@ public:
                 return static_cast<To>(from);
             }
         } catch (const std::exception &e) {
-            logger.addLog("Conversion failed: " + std::string(e.what()));
+            logger.log("Conversion failed: " + std::string(e.what()));
             return std::nullopt;
         }
     }

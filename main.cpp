@@ -24,7 +24,7 @@ int main()
     std::string logFilename = setupLogger();
     Logger logger(logFilename);
 
-    logger.addLog("Starting the program");
+    logger.log("Starting the program");
 
     std::cout << "*---------------------------------*\n"
                  "*  Example with NumberSwapper     *\n"
@@ -67,7 +67,7 @@ int main()
     // Creating an instance of MathOperationsExamples
     MathOperationsExamples();
 
-    logger.addLog("Ending the program");
+    logger.log("Ending the program");
     return 0;
 }
 

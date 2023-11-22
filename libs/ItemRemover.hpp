@@ -88,7 +88,7 @@ public:
 private:
     void addLog(const std::string &message)
     {
-        logger.addLog(message);
+        logger.log(message);
     }
 };
 

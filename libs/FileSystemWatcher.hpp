@@ -19,7 +19,7 @@ public:
         }()), 
           isWatching(false)
     {
-        logger.addLog("FileSystemWatcher instance created");
+        logger.log("FileSystemWatcher instance created");
     }
 
     ~FileSystemWatcher() {
@@ -33,12 +33,12 @@ public:
         watcherThread = std::thread([this, directory]() {
             while (isWatching) {
                 for (const auto & entry : std::filesystem::directory_iterator(directory)) {
-                    logger.addLog("Found file: " + entry.path().string());
+                    logger.log("Found file: " + entry.path().string());
                 }
                 std::this_thread::sleep_for(std::chrono::seconds(1)); // Sleep for a while
             }
         });
-        logger.addLog("Started watching " + directory);
+        logger.log("Started watching " + directory);
     }
 
     void stopWatching() {
@@ -46,7 +46,7 @@ public:
         if (watcherThread.joinable()) {
             watcherThread.join();
         }
-        logger.addLog("Stopped watching");
+        logger.log("Stopped watching");
     }
 
     // Additional methods as needed

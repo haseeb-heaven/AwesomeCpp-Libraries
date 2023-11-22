@@ -22,21 +22,21 @@ public:
             return logFilename;
         }())
     {
-        logger.addLog("FileSystemWatcher instance created");
+        logger.log("FileSystemWatcher instance created");
     }
 
     void registerEvent(const std::string& eventName, std::function<void()> callback) {
         eventMap[eventName] = callback;
-        logger.addLog("Event registered: " + eventName);
+        logger.log("Event registered: " + eventName);
     }
 
     void triggerEvent(const std::string& eventName) {
         if (eventMap.find(eventName) == eventMap.end()) {
-            logger.addLog("Event not found: " + eventName);
+            logger.log("Event not found: " + eventName);
             throw std::runtime_error("Event not registered");
         }
         eventMap[eventName](); // Call the callback function
-        logger.addLog("Event triggered: " + eventName);
+        logger.log("Event triggered: " + eventName);
     }
 };
 

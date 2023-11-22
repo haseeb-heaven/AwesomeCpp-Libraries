@@ -72,7 +72,7 @@ private:
      */
     void addLog(const std::string &message)
     {
-        logger.addLog(message);
+        logger.log(message);
     }
 };
 #endif // NUMBER_SWAPPER_HPP
