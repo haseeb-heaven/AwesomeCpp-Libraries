@@ -4,12 +4,7 @@
 #include "libs/TypeResolver.hpp"
 #include "libs/DataConvertor.hpp"
 #include "libs/MathOperations.hpp"
-#include <iostream>
-
-#include "libs/MathOperations.hpp"
-#include <vector>
-#include <iostream>
-#include <functional>
+#include "libs/FileManager.hpp"
 
 std::string setupLogger();
 void NumberSwapperExamples();
@@ -17,6 +12,7 @@ void ItemRemoverExamples();
 void TypeResolverExamples();
 void DataConvertorExamples();
 void MathOperationsExamples();
+void FileManagerExamples();
 
 int main()
 {
@@ -66,6 +62,15 @@ int main()
 
     // Creating an instance of MathOperationsExamples
     MathOperationsExamples();
+
+    std::cout << "*---------------------------------*\n"
+                 "*  Example with FileManager       *\n"
+                 "*---------------------------------*\n"
+                 "*"
+              << std::endl;
+
+    // Creating an instance of MathOperationsExamples
+    FileManagerExamples();
 
     logger.log("Ending the program");
     return 0;
@@ -199,6 +204,25 @@ void MathOperationsExamples()
     {
         std::cerr << "Error: " << e.what() << std::endl;
     }
+}
+
+void FileManagerExamples()
+{
+    FileManager fileManager;
+    std::string filename = "demo_file.txt";
+
+    // Example 1: Create a file
+    fileManager.createFile(filename);
+
+    // Example 2: Write to the file
+    fileManager.updateFile(filename, "Hello, world!");
+
+    // Example 3: Read from the file
+    std::string content = fileManager.readFile(filename);
+    std::cout << "Content of " << filename << ": " << content << std::endl;
+
+    // Example 4: Delete the file
+    fileManager.deleteFile(filename);
 }
 
 std::string setupLogger()
