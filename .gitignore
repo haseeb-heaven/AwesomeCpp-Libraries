@@ -2,3 +2,4 @@
 *.txt
 /log
 *.git
+.vscode
