@@ -3,6 +3,7 @@
 ## Features ✨
 - **DataConvertor**: Convert various data types. 🔄
 - **DataParser**: Parse data from strings (JSON, CSV, etc.). 📝
+- **HttpClient**: Send HTTP requests with GET, POST, PUT, and DELETE methods. 🌐
 - **EventHandlingSystem**: Manage and dispatch events. 🎉
 - **FileManager**: Perform CRUD operations on files with robust error handling. 📁
 - **FileSystemWatcher**: Monitor file system changes. 🔍
@@ -17,6 +18,13 @@ Clone the repository:
 - `git clone https://github.com/haseeb-heaven/AwesomeCpp-Libraries`
 - `cd AwesomeCpp-Libraries`
 open main.cpp and run the program
+### Dependencies - Curl for Http Client.
+- Http Client module requires cURL to be installed on your system. You can download cURL from [here](https://curl.se/download.html) and follow the instructions to install it on your system.
+- for MacOs users, you can install cURL using Homebrew by running the following command in your terminal:
+- `brew install curl`
+- for Linux users, you can install cURL using apt-get by running the following command in your terminal:
+- `sudo apt-get install curl`
+- for Windows users, you can download cURL from [here](https://curl.se/windows/) and follow the instructions to install it on your system.
 
 
 ## Usage 🚀
@@ -34,18 +42,20 @@ Configure each module as needed. Refer to individual header files for module-spe
 
 ## Structure 🏗️
 - `libs/`: Contains all the header files for the different modules.
-- `libs/FileManager.hpp`: [FileManager.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileManager.hpp) - Header file for the FileManager module.
-- `libs/DataConvertor.hpp`: [DataConvertor.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataConvertor.hpp) - Header file for the DataConvertor module.
-- `libs/DataParser.hpp`: [DataParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataParser.hpp) - Header file for the DataParser module.
-- `libs/EventHandlingSystem.hpp`: [EventHandlingSystem.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/EventHandlingSystem.hpp) - Header file for the EventHandlingSystem module.
-- `libs/FileParser.hpp`: [FileParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileParser.hpp) - Header file for the FileParser module.
-- `libs/FileSystemWatcher.hpp`: [FileSystemWatcher.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileSystemWatcher.hpp) - Header file for the FileSystemWatcher module.
-- `libs/ItemRemover.hpp`: [ItemRemover.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/ItemRemover.hpp) - Header file for the ItemRemover module.
-- `libs/MathOperations.hpp`: [MathOperations.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/MathOperations.hpp) - Header file for the MathOperations module.
-- `libs/NumberSwapper.hpp`: [NumberSwapper.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/NumberSwapper.hpp) - Header file for the NumberSwapper module.
-- `libs/PrintContainer.hpp`: [PrintContainer.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/PrintContainer.hpp) - Header file for the PrintContainer module.
-- `libs/TypeResolver.hpp`: [TypeResolver.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/TypeResolver.hpp) - Header file for the TypeResolver module.
-- `libs/Logger.hpp`: [Logger.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/Logger.hpp) - Header file for the Logger module.
+- [HttpClient.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/HttpClient.hpp): - Header file for the HttpClient module **(requires cURL)** and see example usage in [http_request_example.cpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/http_request_example.cpp)
+
+- [FileManager.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileManager.hpp) - Header file for the FileManager module.
+- [DataConvertor.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataConvertor.hpp) - Header file for the DataConvertor module.
+- [DataParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataParser.hpp) - Header file for the DataParser module.
+- [EventHandlingSystem.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/EventHandlingSystem.hpp) - Header file for the EventHandlingSystem module.
+- [FileParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileParser.hpp) - Header file for the FileParser module.
+- [FileSystemWatcher.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileSystemWatcher.hpp) - Header file for the FileSystemWatcher module.
+- [ItemRemover.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/ItemRemover.hpp) - Header file for the ItemRemover module.
+- [MathOperations.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/MathOperations.hpp) - Header file for the MathOperations module.
+- [NumberSwapper.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/NumberSwapper.hpp) - Header file for the NumberSwapper module.
+- [PrintContainer.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/PrintContainer.hpp) - Header file for the PrintContainer module.
+- [TypeResolver.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/TypeResolver.hpp) - Header file for the TypeResolver module.
+- [Logger.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/Logger.hpp) - Header file for the Logger module.
 
 - `main.cpp`: Example usage of the libraries.
 

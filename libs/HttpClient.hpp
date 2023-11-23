@@ -1,9 +1,18 @@
-// HttpClientImplementation.cpp
+#ifndef HTTP_CLIENT_HPP
+#define HTTP_CLIENT_HPP
 
-#include <iostream>
-#include <string>
-#include <curl/curl.h>
-#include "Logger.hpp"
+/*
+// This code requires the curl library to run.
+// To compile and run, use the following command:
+// g++ -std=c++17 file.cpp -lcurl -o file && ./file
+*/
+
+
+#include <iostream> // Include the iostream library for input/output operations
+#include <string> // Include the string library for string manipulation
+#include <curl/curl.h> // Include the curl library for making HTTP requests
+#include "Logger.hpp" // Include the Logger header file for logging events
+
 
 /**
  * @brief The HttpClient class provides methods for making HTTP requests.
@@ -130,3 +139,5 @@ private:
         return response;
     }
 };
+
+#endif // HTTP_CLIENT_HPP

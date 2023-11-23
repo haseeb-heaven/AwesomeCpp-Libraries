@@ -8,18 +8,21 @@ void HttpRequestExamples(const std::string& url);
 std::string setupLogger();
 void removeLogs();
 
-Logger logger("HttpRequest.log");
+// Setting up the logger
+Logger logger("http_request_example.log");
 
 int main(int argc, char* argv[]) {
-    // Setting up the logger
+
     logger.log("Starting the program");
 
     std::string url;
-    std::cout << "Http URL: ";
+    std::cout << "URL: ";
     std::cin >> url;
 
     HttpRequestExamples(url);
     logger.log("Program finished");
+
+    removeLogs(); // Remove the logs
 
     return 0;
 }
@@ -42,7 +45,6 @@ void HttpRequestExamples(const std::string& url) {
 
         // Save the file Response to a file
         // check file exists
-        
         if (std::filesystem::exists(outputResponseFile)) {
             fileManager.deleteFile(outputResponseFile);
         }
@@ -50,15 +52,30 @@ void HttpRequestExamples(const std::string& url) {
         fileManager.createFile(outputResponseFile);
         fileManager.updateFile(outputResponseFile, response);
 
-        // Parse the JSON response.
-        auto parsedData = fileParser.parseJSON(outputResponseFile);
+        std::map<std::string,std::string> parsedData;
 
+        // Determine the file type based on the URL
+        std::string fileType;
+        if (url.find(".json") != std::string::npos) {
+            parsedData = fileParser.parseJSON(outputResponseFile);
+        } else if (url.find(".xml") != std::string::npos) {
+            parsedData = fileParser.parseXML(outputResponseFile);
+        } else if (url.find(".csv") != std::string::npos) {
+            parsedData = fileParser.parseCSV(outputResponseFile);
+        } else {
+            parsedData = fileParser.parseJSON(outputResponseFile);
+            return;
+        }
+
+        // Parse the file based on the determined file type
+        
         // Now accessing the parsed data
         logger.log("Parsed Data:");
         for (const auto& [key, value] : parsedData) {
             std::cout << (key + ": " + value) << std::endl;
         }
         logger.log("Parsed Data End");
+
         // Delete the file
         fileManager.deleteFile(outputResponseFile);
     } catch (const std::exception& e) {
