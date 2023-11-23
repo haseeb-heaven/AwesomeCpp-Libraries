@@ -21,8 +21,8 @@ void TypeResolverExamples();   // Function to demonstrate data type resolution
 void DataConvertorExamples();  // Function to demonstrate data conversion
 void MathOperationsExamples(); // Function to demonstrate mathematical operations
 void FileManagerExamples();    // Function to demonstrate file management
-void FileParserExamples();        // Function to demonstrate file management
-void removeLogs(); // Function to remove logs
+void FileParserExamples();     // Function to demonstrate file management
+void removeLogs();             // Function to remove logs
 
 int main()
 {
@@ -308,24 +308,40 @@ void FileManagerExamples()
     std::cout << "Successfully deleted " << filename << std::endl;
 }
 
-void FileParserExamples() {
-    try {
+void FileParserExamples()
+{
+    try
+    {
         FileParser parser;
         std::string jsonPath = "data/jsonfile.json";
         std::string csvPath = "data/csvfile.csv";
         std::string xmlPath = "data/xmlfile.xml";
 
-        std::string jsonData = parser.parseJSON(jsonPath);
-        std::string csvData = parser.parseCSV(csvPath);
-        std::string xmlData = parser.parseXML(xmlPath);
+        auto jsonData = parser.parseJSON(jsonPath);
+
+        std::cout << "JSON Data:" << std::endl;
+        for (const auto &[key, value] : jsonData)
+            std::cout << (key + ": " + value) << std::endl;
+    
+        auto csvData = parser.parseCSV(csvPath);
+
+        std::cout << "CSV Data:" << std::endl;
+        for (const auto &[key, value] : csvData)
+            std::cout << (key + ": " + value) << std::endl;
+        
+        auto xmlData = parser.parseXML(xmlPath);
+
+        std::cout << "XML Data:" << std::endl;
+        for (const auto &[key, value] : xmlData)
+            std::cout << (key + ": " + value) << std::endl;
 
         parser.writeToFile("data/output.txt");
-    
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         std::cerr << "Error: " << e.what() << std::endl;
     }
 }
-
 
 // Function to set up the logger
 std::string setupLogger()
@@ -334,16 +350,20 @@ std::string setupLogger()
     std::string::size_type pos = currentFile.find_last_of("/\\");
     std::string fileName = currentFile.substr(pos + 1, currentFile.rfind(".") - pos - 1);
     // if logs directory does not exist, create it
-    if (!std::filesystem::exists("logs")) {
+    if (!std::filesystem::exists("logs"))
+    {
         std::filesystem::create_directory("logs");
     }
     return Logger::getLogsFilename(fileName);
 }
 
-void removeLogs() {
+void removeLogs()
+{
     std::filesystem::path currentDir = std::filesystem::current_path();
-    for (const auto& entry : std::filesystem::recursive_directory_iterator(currentDir)) {
-        if (entry.path().extension() == ".log") {
+    for (const auto &entry : std::filesystem::recursive_directory_iterator(currentDir))
+    {
+        if (entry.path().extension() == ".log")
+        {
             std::filesystem::remove(entry.path());
         }
     }

@@ -7,6 +7,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <map>
 #include "Logger.hpp"
 
 /**
@@ -36,23 +37,23 @@ public:
      * @param filepath The path to the JSON file.
      * @return The parsed JSON data as a string.
      */
-    std::string parseJSON(const std::string& filepath) {
+    std::map<std::string, std::string> parseJSON(const std::string& filepath) {
+        std::map<std::string, std::string> jsonMap;
         try {
             std::string jsonData = readFile(filepath);
-            std::regex jsonRegex("\"([^\"]+)\":\\s*\"([^\"]*)\"");
+            std::regex jsonRegex("\"([^\"]+)\":\\s*([^,\\n\\r]+)");
             std::smatch jsonMatch;
 
             while (std::regex_search(jsonData, jsonMatch, jsonRegex)) {
-                jsonDataStream << "Key: " << jsonMatch[1] << ", Value: " << jsonMatch[2] << "\n";
+                jsonMap[jsonMatch[1]] = jsonMatch[2];
                 jsonData = jsonMatch.suffix();
             }
 
-            return jsonDataStream.str();
             logger.log("JSON file parsed successfully.");
         } catch (const std::exception& e) {
             logger.log("Error parsing JSON: " + std::string(e.what()));
         }
-        return std::string();
+        return jsonMap;
     }
 
     /**
@@ -60,22 +61,27 @@ public:
      * @param filepath The path to the CSV file.
      * @return The parsed CSV data as a string.
      */
-    std::string parseCSV(const std::string& filepath) {
+    std::map<std::string, std::string> parseCSV(const std::string& filepath) {
+        std::map<std::string, std::string> csvMap;
         try {
             std::string csvData = readFile(filepath);
             std::istringstream csvStream(csvData);
             std::string line;
 
             while (std::getline(csvStream, line)) {
-                 csvDataStream << parseCSVLine(line);
+                std::istringstream lineStream(line);
+                std::string key, value;
+
+                if (std::getline(lineStream, key, ',') && std::getline(lineStream, value)) {
+                    csvMap[key] = value;
+                }
             }
             
             logger.log("CSV file parsed successfully.");
-            return csvDataStream.str();
         } catch (const std::exception& e) {
             logger.log("Error parsing CSV: " + std::string(e.what()));
         }
-        return std::string();
+        return csvMap;
     }
 
     /**
@@ -83,23 +89,23 @@ public:
      * @param filepath The path to the XML file.
      * @return The parsed XML data as a string.
      */
-    std::string parseXML(const std::string& filepath) {
+    std::map<std::string, std::string> parseXML(const std::string& filepath) {
+        std::map<std::string, std::string> xmlMap;
         try {
             std::string xmlData = readFile(filepath);
             std::regex xmlRegex("<([^>]+)>([^<]*)</\\1>");
             std::smatch xmlMatch;
 
             while (std::regex_search(xmlData, xmlMatch, xmlRegex)) {
-                xmlDataStream << "Tag: " << xmlMatch[1] << ", Value: " << xmlMatch[2] << "\n";
+                xmlMap[xmlMatch[1]] = xmlMatch[2];
                 xmlData = xmlMatch.suffix();
             }
-            
-            return xmlDataStream.str();
+
             logger.log("XML file parsed successfully.");
         } catch (const std::exception& e) {
             logger.log("Error parsing XML: " + std::string(e.what()));
         }
-        return std::string();
+        return xmlMap;
     }
 
     /**

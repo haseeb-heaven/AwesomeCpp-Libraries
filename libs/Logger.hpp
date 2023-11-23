@@ -14,14 +14,14 @@ class Logger
 {
 private:
     std::string logFilename; ///< The name of the log file.
-    std::ofstream logFile; ///< The output file stream for writing logs.
+    std::ofstream logFile;   ///< The output file stream for writing logs.
 
 public:
     /**
      * @brief Constructs a Logger object with the specified log file name.
      * @param filename The name of the log file. Default is "logger.log".
      */
-    Logger(const std::string& filename = "logger.log") : logFilename(filename), logFile(filename, std::ios::app)
+    Logger(const std::string &filename = "logger.log") : logFilename(filename), logFile(filename, std::ios::app)
     {
     }
 
@@ -52,7 +52,7 @@ public:
      * @brief Writes a log message to the log file.
      * @param message The log message to be written.
      */
-    void log(const std::string& message)
+    void log(const std::string &message)
     {
         auto now = std::chrono::system_clock::now();
         std::time_t time = std::chrono::system_clock::to_time_t(now);
@@ -62,6 +62,40 @@ public:
             std::string timeStr = std::ctime(&time);
             timeStr.pop_back(); // Remove the newline character
             logFile << timeStr << " - " << message << std::endl;
+        }
+    }
+
+    /**
+     * @brief Writes a warning message to the log file.
+     * @param message The warning message to be written.
+     */
+    void warn(const std::string &message)
+    {
+        auto now = std::chrono::system_clock::now();
+        std::time_t time = std::chrono::system_clock::to_time_t(now);
+
+        if (logFile.is_open())
+        {
+            std::string timeStr = std::ctime(&time);
+            timeStr.pop_back(); // Remove the newline character
+            logFile << timeStr << " - WARNING: " << message << std::endl;
+        }
+    }
+
+    /**
+     * @brief Writes an error message to the log file.
+     * @param message The error message to be written.
+     */
+    void error(const std::string &message)
+    {
+        auto now = std::chrono::system_clock::now();
+        std::time_t time = std::chrono::system_clock::to_time_t(now);
+
+        if (logFile.is_open())
+        {
+            std::string timeStr = std::ctime(&time);
+            timeStr.pop_back(); // Remove the newline character
+            logFile << timeStr << " - ERROR: " << message << std::endl;
         }
     }
 };
