@@ -34,6 +34,19 @@ Configure each module as needed. Refer to individual header files for module-spe
 
 ## Structure 🏗️
 - `libs/`: Contains all the header files for the different modules.
+- `libs/FileManager.hpp`: [FileManager.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileManager.hpp) - Header file for the FileManager module.
+- `libs/DataConvertor.hpp`: [DataConvertor.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataConvertor.hpp) - Header file for the DataConvertor module.
+- `libs/DataParser.hpp`: [DataParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataParser.hpp) - Header file for the DataParser module.
+- `libs/EventHandlingSystem.hpp`: [EventHandlingSystem.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/EventHandlingSystem.hpp) - Header file for the EventHandlingSystem module.
+- `libs/FileParser.hpp`: [FileParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileParser.hpp) - Header file for the FileParser module.
+- `libs/FileSystemWatcher.hpp`: [FileSystemWatcher.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileSystemWatcher.hpp) - Header file for the FileSystemWatcher module.
+- `libs/ItemRemover.hpp`: [ItemRemover.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/ItemRemover.hpp) - Header file for the ItemRemover module.
+- `libs/MathOperations.hpp`: [MathOperations.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/MathOperations.hpp) - Header file for the MathOperations module.
+- `libs/NumberSwapper.hpp`: [NumberSwapper.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/NumberSwapper.hpp) - Header file for the NumberSwapper module.
+- `libs/PrintContainer.hpp`: [PrintContainer.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/PrintContainer.hpp) - Header file for the PrintContainer module.
+- `libs/TypeResolver.hpp`: [TypeResolver.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/TypeResolver.hpp) - Header file for the TypeResolver module.
+- `libs/Logger.hpp`: [Logger.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/Logger.hpp) - Header file for the Logger module.
+
 - `main.cpp`: Example usage of the libraries.
 
 ## Contributing 🤝
