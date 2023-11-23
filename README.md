@@ -103,3 +103,6 @@ For the versions available, see the tags on this repository.
 
 ## License 📜
 This project is licensed under the [MIT LICENSE] - see the LICENSE file for details.
+
+## Authors 👨‍💻
+- **HeavenHM** - [haseeb-heaven](https://github.com/haseeb-heaven)
