@@ -1,10 +1,19 @@
+/*
+Description: This is an example of how to use the HttpClient.
+This show how to send a GET request to a URL and save the response to a file.
+and how to parse the response file based on the file type.
+
+Note:
+This code requires the curl library to run.
+To compile and run, use the following command:
+g++ -std=c++17 file.cpp -lcurl -o file && ./file
+*/
 #include "libs/HttpClient.hpp"
 #include "libs/FileParser.hpp"
 #include "libs/FileManager.hpp"
 #include "libs/Logger.hpp"
 
-
-void HttpRequestExamples(const std::string& url);
+void sendUrlRequest(const std::string& url);
 std::string setupLogger();
 void removeLogs();
 
@@ -19,7 +28,7 @@ int main(int argc, char* argv[]) {
     std::cout << "URL: ";
     std::cin >> url;
 
-    HttpRequestExamples(url);
+    sendUrlRequest(url);
     logger.log("Program finished");
 
     removeLogs(); // Remove the logs
@@ -27,12 +36,12 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-
-// This code requires the curl library to run.
-// To compile and run, use the following command:
-// g++ -std=c++17 file.cpp -lcurl -o file && ./file
-
-void HttpRequestExamples(const std::string& url) {
+/**
+ * Sends a URL request.
+ *
+ * @param url The URL to send the request to.
+ */
+void sendUrlRequest(const std::string& url) {
     HttpClient httpClient; // HTTP client object
     FileManager fileManager; // File manager object
     FileParser fileParser; // File parser object
@@ -44,17 +53,13 @@ void HttpRequestExamples(const std::string& url) {
         std::string outputResponseFile = "response.txt";
 
         // Save the file Response to a file
-        // check file exists
-        if (std::filesystem::exists(outputResponseFile)) {
-            fileManager.deleteFile(outputResponseFile);
-        }
-
         fileManager.createFile(outputResponseFile);
         fileManager.updateFile(outputResponseFile, response);
 
+        // Store the parsed data.
         std::map<std::string,std::string> parsedData;
 
-        // Determine the file type based on the URL
+        // Determine the file type based on the URL and Parse the file based on the determined file type
         std::string fileType;
         if (url.find(".json") != std::string::npos) {
             parsedData = fileParser.parseJSON(outputResponseFile);
@@ -66,10 +71,8 @@ void HttpRequestExamples(const std::string& url) {
             parsedData = fileParser.parseJSON(outputResponseFile);
             return;
         }
-
-        // Parse the file based on the determined file type
         
-        // Now accessing the parsed data
+        // Now dynamically accessing the parsed data
         logger.log("Parsed Data:");
         for (const auto& [key, value] : parsedData) {
             std::cout << (key + ": " + value) << std::endl;

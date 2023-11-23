@@ -97,8 +97,6 @@ public:
         return mean;
     }
 
-// ... (Continuing from previous code)
-
 /**
  * Calculates the variance of a vector of numbers.
  *

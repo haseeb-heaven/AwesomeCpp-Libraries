@@ -2,9 +2,9 @@
 #define HTTP_CLIENT_HPP
 
 /*
-// This code requires the curl library to run.
-// To compile and run, use the following command:
-// g++ -std=c++17 file.cpp -lcurl -o file && ./file
+- This code requires the curl library to run.
+- To compile and run, use the following command:
+- g++ -std=c++17 file.cpp -lcurl -o file && ./file
 */
 
 
