@@ -42,22 +42,58 @@ Configure each module as needed. Refer to individual header files for module-spe
 
 ## Structure 🏗️
 - `libs/`: Contains all the header files for the different modules.
-- [HttpClient.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/HttpClient.hpp): - Header file for the HttpClient module **(requires cURL)** and see example usage in [http_request_example.cpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/http_request_example.cpp)
+## 🏗️ Library Modules
 
-- [FileManager.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileManager.hpp) - Header file for the FileManager module.
-- [DataConvertor.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataConvertor.hpp) - Header file for the DataConvertor module.
-- [DataParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataParser.hpp) - Header file for the DataParser module.
-- [EventHandlingSystem.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/EventHandlingSystem.hpp) - Header file for the EventHandlingSystem module.
-- [FileParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileParser.hpp) - Header file for the FileParser module.
-- [FileSystemWatcher.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileSystemWatcher.hpp) - Header file for the FileSystemWatcher module.
-- [ItemRemover.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/ItemRemover.hpp) - Header file for the ItemRemover module.
-- [MathOperations.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/MathOperations.hpp) - Header file for the MathOperations module.
-- [NumberSwapper.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/NumberSwapper.hpp) - Header file for the NumberSwapper module.
-- [PrintContainer.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/PrintContainer.hpp) - Header file for the PrintContainer module.
-- [TypeResolver.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/TypeResolver.hpp) - Header file for the TypeResolver module.
-- [Logger.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/Logger.hpp) - Header file for the Logger module.
+### HttpClient Module
+- **[HttpClient.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/HttpClient.hpp)**
+  - 🌐 Header file for the HttpClient module
+  - 🛠️ Requires cURL for operation
+  - 📖 Example usage: [http_request_example.cpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/http_request_example.cpp)
 
-- `main.cpp`: Example usage of the libraries.
+### FileManager Module
+- **[FileManager.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileManager.hpp)**
+  - 📂 Manages file-related operations
+
+### DataConvertor Module
+- **[DataConvertor.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/DataConvertor.hpp)**
+  - 🔄 Converts data between different `c++` data types like `string` to `int` and vice versa.
+
+### FileParser Module
+- **[FileParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileParser.hpp)**
+  - 📝 Parses data for various applications for (JSON,CSV,XML) and more.
+
+### EventHandlingSystem Module
+- **[EventHandlingSystem.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/EventHandlingSystem.hpp)**
+  - 📅 Manages event handling within the application
+
+### FileSystemWatcher Module
+- **[FileSystemWatcher.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileSystemWatcher.hpp)**
+  - 🔍 Monitors file system changes
+
+### ItemRemover Module
+- **[ItemRemover.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/ItemRemover.hpp)**
+  - 🗑️ Removes items from collections like `Map`, `Vector`, `List`, `Set`, etc.
+
+### MathOperations Module
+- **[MathOperations.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/MathOperations.hpp)**
+  - ➕ Performs mathematical operations on `Matrix` and `Vector` statstical analysis.
+
+### NumberSwapper Module
+- **[NumberSwapper.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/NumberSwapper.hpp)**
+  - 🔁 Swaps numbers in data types like `int`, `float`, `double`, `string`, etc.
+
+### PrintContainer Module
+- **[PrintContainer.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/PrintContainer.hpp)**
+  - 🖨️ Prints container contents like `List`, `Vector`, `Map`, `Set`, etc.
+
+### TypeResolver Module
+- **[TypeResolver.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/TypeResolver.hpp)**
+  - 🧩 Resolves data types names at compile time and runtime.
+
+### Logger Module
+- **[Logger.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/Logger.hpp)**
+  - 📜 Handles logging and reporting
+
 
 ## Contributing 🤝
 Contributions are welcome! Please feel free to submit pull requests or open issues.
