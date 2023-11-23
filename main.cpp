@@ -12,6 +12,7 @@ Coding : C++ 17.
 #include "libs/MathOperations.hpp" // Used for performing mathematical operations
 #include "libs/FileManager.hpp"    // Used for file management
 #include "libs/PrintContainer.hpp" // Used for printing container elements
+#include "libs/FileParser.hpp"     // Used for parsing files
 
 std::string setupLogger();     // Function to set up the logger
 void NumberSwapperExamples();  // Function to demonstrate number swapping
@@ -20,6 +21,7 @@ void TypeResolverExamples();   // Function to demonstrate data type resolution
 void DataConvertorExamples();  // Function to demonstrate data conversion
 void MathOperationsExamples(); // Function to demonstrate mathematical operations
 void FileManagerExamples();    // Function to demonstrate file management
+void ParserExamples();        // Function to demonstrate file management
 
 int main()
 {
@@ -40,6 +42,7 @@ int main()
                   << "4. DataConvertorExample\n"
                   << "5. MathOperationsExample\n"
                   << "6. FileManagerExample\n"
+                  << "7. ParserExample\n"
                   << "0. Exit\n"
                   << "Enter your choice: ";
         std::cin >> choice;
@@ -94,7 +97,19 @@ int main()
                       << std::endl;
             FileManagerExamples();
             break;
+        case 7:
+            std::cout << "*---------------------------------*\n"
+                      << "*  Example with Parser            *\n"
+                      << "*---------------------------------*\n"
+                      << "*"
+                      << std::endl;
+            ParserExamples();
+            break;
         case 0:
+            // remove all logs file recursively from logs and current directory
+            std::string removeCommand = "rm " + logFilename + " logs/*.log";
+            std::system(removeCommand.c_str());
+
             std::cout << "Exiting the program\n";
             break;
         default:
@@ -293,6 +308,25 @@ void FileManagerExamples()
     fileManager.deleteFile(filename);
     std::cout << "Successfully deleted " << filename << std::endl;
 }
+
+void ParserExamples() {
+    try {
+        FileParser parser;
+        std::string jsonPath = "data/jsonfile.json";
+        std::string csvPath = "data/csvfile.csv";
+        std::string xmlPath = "data/xmlfile.xml";
+
+        std::string jsonData = parser.parseJSON(jsonPath);
+        std::string csvData = parser.parseCSV(csvPath);
+        std::string xmlData = parser.parseXML(xmlPath);
+
+        parser.writeToFile("data/output.txt");
+    
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+}
+
 
 // Function to set up the logger
 std::string setupLogger()
