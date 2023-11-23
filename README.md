@@ -2,6 +2,7 @@
 
 ## Features ✨
 - **DataConvertor**: Convert various data types. 🔄
+- **DataParser**: Parse data from strings (JSON, CSV, etc.). 📝
 - **EventHandlingSystem**: Manage and dispatch events. 🎉
 - **FileManager**: Perform CRUD operations on files with robust error handling. 📁
 - **FileSystemWatcher**: Monitor file system changes. 🔍
@@ -26,6 +27,7 @@ open main.cpp and run the program
 ## Examples 📚
 - **MathOperations**: Perform matrix addition, subtraction, and calculate the mean of numbers. ➕➖🔢
 - **FileManager**: Create, read, update, and delete files safely with extensive error handling. 📁✏️❌
+- **File Parser**: Parse data from a CSV,JSON,XML file. 📝
 
 ## Settings 🔧
 Configure each module as needed. Refer to individual header files for module-specific settings.
