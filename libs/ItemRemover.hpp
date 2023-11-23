@@ -4,7 +4,6 @@
 #include <iostream>           // For input/output operations
 #include <list>               // For doubly-linked list container
 #include <vector>             // For dynamic array container
-#include <array>              // For fixed-size array container
 #include <set>                // For sorted set container
 #include <map>                // For associative array container
 #include <stack>              // For stack container
@@ -12,19 +11,15 @@
 #include <string>             // For string operations
 #include <algorithm>          // For algorithms like sort, find, etc.
 #include <iterator>           // For iterator operations
-#include <numeric>            // For numeric algorithms like accumulate, etc.
 #include <functional>         // For function objects and binders
-#include <chrono>             // For time-related operations
-#include <fstream>            // For file input/output operations
-#include "PrintContainer.hpp" // Custom header for printing container elements
-#include "Logger.hpp"         // Custom header for logging messages to a file
+#include "Logger.hpp"         // For logging operations
 
 // Class template to remove the nth element from a container
 template <typename Container>
 class ItemRemover
 {
 private:
-    Logger logger;
+    Logger logger; // Logger object for logging operations
 
 public:
     ItemRemover()
@@ -40,14 +35,23 @@ public:
     {
     }
 
+    /**
+     * Removes the nth element from the container.
+     * @param container The container from which the element needs to be removed.
+     * @param index The index of the element to be removed (0-based indexing).
+     */
     void removeNthElement(Container &container, typename Container::size_type index)
     {
         index = index - 1; // Adjust the index to account for 0-based indexing
         addLog("Removing nth element from container with index: " + std::to_string(index));
+
+        // For stack and queue containers
         if constexpr (std::is_same_v<Container, std::stack<typename Container::value_type>> || std::is_same_v<Container, std::queue<typename Container::value_type>>)
         {
             Container temp1, temp2;
             typename Container::size_type size = container.size();
+
+            // Copy elements from container to temp1, excluding the nth element
             for (typename Container::size_type idx = 0; idx < size; ++idx)
             {
                 if (idx != index)
@@ -56,12 +60,14 @@ public:
                 }
                 container.pop();
             }
+
             // Push the elements from temp1 to temp2
             while (!temp1.empty())
             {
                 temp2.push(temp1.top());
                 temp1.pop();
             }
+
             // Push the elements from temp2 back to the original container
             while (!temp2.empty())
             {
@@ -86,6 +92,10 @@ public:
     }
 
 private:
+    /**
+     * Adds a log message to the logger.
+     * @param message The log message to be added.
+     */
     void addLog(const std::string &message)
     {
         logger.log(message);

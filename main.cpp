@@ -1,18 +1,25 @@
-#include "libs/ItemRemover.hpp"
-#include "libs/NumberSwapper.hpp"
-#include "libs/Logger.hpp"
-#include "libs/TypeResolver.hpp"
-#include "libs/DataConvertor.hpp"
-#include "libs/MathOperations.hpp"
-#include "libs/FileManager.hpp"
+/*
+Brief: These are Awesome Cpp libraries project under MIT license.
+Author: HeavenHM
+Coding : C++ 17.
+*/
 
-std::string setupLogger();
-void NumberSwapperExamples();
-void ItemRemoverExamples();
-void TypeResolverExamples();
-void DataConvertorExamples();
-void MathOperationsExamples();
-void FileManagerExamples();
+#include "libs/ItemRemover.hpp" // Used for removing items from containers
+#include "libs/NumberSwapper.hpp" // Used for swapping numbers
+#include "libs/Logger.hpp" // Used for logging program events
+#include "libs/TypeResolver.hpp" // Used for resolving data types
+#include "libs/DataConvertor.hpp" // Used for converting data types
+#include "libs/MathOperations.hpp" // Used for performing mathematical operations
+#include "libs/FileManager.hpp" // Used for file management
+#include "libs/PrintContainer.hpp" // Used for printing container elements
+
+std::string setupLogger(); // Function to set up the logger
+void NumberSwapperExamples(); // Function to demonstrate number swapping
+void ItemRemoverExamples(); // Function to demonstrate item removal from containers
+void TypeResolverExamples(); // Function to demonstrate data type resolution
+void DataConvertorExamples(); // Function to demonstrate data conversion
+void MathOperationsExamples(); // Function to demonstrate mathematical operations
+void FileManagerExamples(); // Function to demonstrate file management
 
 int main()
 {
@@ -22,6 +29,7 @@ int main()
 
     logger.log("Starting the program");
 
+    // Demonstrate NumberSwapper
     std::cout << "*---------------------------------*\n"
                  "*  Example with NumberSwapper     *\n"
                  "*---------------------------------*\n"
@@ -29,53 +37,51 @@ int main()
               << std::endl;
     NumberSwapperExamples();
 
+    // Demonstrate ItemRemover
     std::cout << "*---------------------------------*\n"
-                 "*  Example with ItemRemover     *\n"
+                 "*  Example with ItemRemover       *\n"
                  "*---------------------------------*\n"
                  "*"
               << std::endl;
-
     ItemRemoverExamples();
 
+    // Demonstrate TypeResolver
     std::cout << "*---------------------------------*\n"
-                 "*  Example with TypeResolver     *\n"
+                 "*  Example with TypeResolver      *\n"
                  "*---------------------------------*\n"
                  "*"
               << std::endl;
-
     TypeResolverExamples();
 
+    // Demonstrate DataConvertor
     std::cout << "*---------------------------------*\n"
                  "*  Example with DataConvertor     *\n"
                  "*---------------------------------*\n"
                  "*"
               << std::endl;
-
-    // Creating an instance of DataConvertor
     DataConvertorExamples();
 
+    // Demonstrate MathOperations
     std::cout << "*---------------------------------*\n"
-                 "*  Example with MathOperations     *\n"
+                 "*  Example with MathOperations    *\n"
                  "*---------------------------------*\n"
                  "*"
               << std::endl;
-
-    // Creating an instance of MathOperationsExamples
     MathOperationsExamples();
 
+    // Demonstrate FileManager
     std::cout << "*---------------------------------*\n"
                  "*  Example with FileManager       *\n"
                  "*---------------------------------*\n"
                  "*"
               << std::endl;
-
-    // Creating an instance of MathOperationsExamples
     FileManagerExamples();
 
     logger.log("Ending the program");
     return 0;
 }
 
+// Function to demonstrate number swapping
 void NumberSwapperExamples()
 {
     NumberSwapper<int> intSwapper;
@@ -94,6 +100,7 @@ void NumberSwapperExamples()
     std::cout << "Swapped characters: " << c1 << ", " << c2 << std::endl;
 }
 
+// Function to demonstrate item removal from containers
 void ItemRemoverExamples()
 {
     ItemRemover<std::vector<float>> vectorRemover;
@@ -106,22 +113,23 @@ void ItemRemoverExamples()
     vectorRemover.removeNthElement(vector1, 3); // Remove the 3rd element from vector
     printContainer(vector1);
 
-    // example with std::list
+    // Example with std::list
     std::list<int> list1 = {1, 2, 3, 4, 5};
     listRemover.removeNthElement(list1, 3); // Remove the 3rd element from list
     printContainer(list1);
 
-    // example with std::set
+    // Example with std::set
     std::set<double> set1 = {99.5, 33.4, 55.6, 77.7, 11.1};
     setRemover.removeNthElement(set1, 3); // Remove the 3rd element from set
     printContainer(set1);
 
-    // example with std::map
+    // Example with std::map
     std::map<int, std::string> map1 = {{1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}, {5, "five"}};
     mapRemover.removeNthElement(map1, 1); // Remove the 1st element from map
     printContainer(map1);
 }
 
+// Function to demonstrate data type resolution
 void TypeResolverExamples()
 {
     TypeResolver typeResolver;
@@ -138,6 +146,7 @@ void TypeResolverExamples()
     std::cout << TypeResolver::resolveDataType<std::map<std::string, double>>();
 }
 
+// Function to demonstrate data conversion
 void DataConvertorExamples()
 {
     DataConvertor converter;
@@ -163,6 +172,7 @@ void DataConvertorExamples()
         std::cout << "String to Double: " << *doubleResult << std::endl;
 }
 
+// Function to demonstrate mathematical operations
 void MathOperationsExamples()
 {
     // Create matrices for demonstration
@@ -206,6 +216,7 @@ void MathOperationsExamples()
     }
 }
 
+// Function to demonstrate file management
 void FileManagerExamples()
 {
     FileManager fileManager;
@@ -225,6 +236,7 @@ void FileManagerExamples()
     fileManager.deleteFile(filename);
 }
 
+// Function to set up the logger
 std::string setupLogger()
 {
     std::string currentFile = __FILE__;
