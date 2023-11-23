@@ -424,7 +424,7 @@ static size_t rank(const std::vector<std::vector<double>> &matrix)
 };
 
 // Definition of the static logger member
-Logger MathOperations::logger = Logger("MathOperations.log");
+Logger MathOperations::logger = Logger("libs/MathOperations.log");
 
 #endif // MATHOPERATIONS_HPP
 

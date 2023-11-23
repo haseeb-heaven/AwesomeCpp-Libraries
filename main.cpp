@@ -21,7 +21,8 @@ void TypeResolverExamples();   // Function to demonstrate data type resolution
 void DataConvertorExamples();  // Function to demonstrate data conversion
 void MathOperationsExamples(); // Function to demonstrate mathematical operations
 void FileManagerExamples();    // Function to demonstrate file management
-void ParserExamples();        // Function to demonstrate file management
+void FileParserExamples();        // Function to demonstrate file management
+void removeLogs(); // Function to remove logs
 
 int main()
 {
@@ -99,17 +100,15 @@ int main()
             break;
         case 7:
             std::cout << "*---------------------------------*\n"
-                      << "*  Example with Parser            *\n"
+                      << "*  Example with File Parser       *\n"
                       << "*---------------------------------*\n"
                       << "*"
                       << std::endl;
-            ParserExamples();
+            FileParserExamples();
             break;
         case 0:
             // remove all logs file recursively from logs and current directory
-            std::string removeCommand = "rm " + logFilename + " logs/*.log";
-            std::system(removeCommand.c_str());
-
+            removeLogs();
             std::cout << "Exiting the program\n";
             break;
         default:
@@ -309,7 +308,7 @@ void FileManagerExamples()
     std::cout << "Successfully deleted " << filename << std::endl;
 }
 
-void ParserExamples() {
+void FileParserExamples() {
     try {
         FileParser parser;
         std::string jsonPath = "data/jsonfile.json";
@@ -334,5 +333,18 @@ std::string setupLogger()
     std::string currentFile = __FILE__;
     std::string::size_type pos = currentFile.find_last_of("/\\");
     std::string fileName = currentFile.substr(pos + 1, currentFile.rfind(".") - pos - 1);
+    // if logs directory does not exist, create it
+    if (!std::filesystem::exists("logs")) {
+        std::filesystem::create_directory("logs");
+    }
     return Logger::getLogsFilename(fileName);
+}
+
+void removeLogs() {
+    std::filesystem::path currentDir = std::filesystem::current_path();
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(currentDir)) {
+        if (entry.path().extension() == ".log") {
+            std::filesystem::remove(entry.path());
+        }
+    }
 }
