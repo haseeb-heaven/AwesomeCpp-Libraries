@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdexcept>
 #include <numeric>
+#include <cmath>
 #include "Logger.hpp" // Assuming Logger.hpp is in the same directory
 
 class MathOperations
