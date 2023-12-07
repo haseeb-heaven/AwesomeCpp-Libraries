@@ -14,27 +14,59 @@
 #endif
 #include <boost/process.hpp>
 #include <boost/stacktrace.hpp>
+#include "libs/Logger.hpp"
 
+/**
+ * @brief A class that manages processes, including starting, terminating, and retrieving process IDs.
+ */
 class ProcessManager
 {
 private:
+    Logger logger; // Logger object for logging file operations
+
+public:
+    /**
+     * @brief Constructs a ProcessManager object.
+     * The logger is initialized with the logs filename based on the current file's name.
+     */
+    ProcessManager()
+        : logger([]()
+                 {
+            std::string currentFile = __FILE__;
+            std::string::size_type pos = currentFile.find_last_of("/\\");
+            std::string fileName = currentFile.substr(pos + 1, currentFile.rfind(".") - pos - 1);
+            return Logger::getLogsFilename(fileName); }())
+    {
+        logger.log("FileManager instance created");
+    }
+
+    /**
+     * @brief Safely terminates a process with the given process ID.
+     * If the process is not terminated within 5 seconds, it is forcefully killed.
+     * @param pid The process ID to terminate.
+     * @throws std::runtime_error if failed to terminate the process.
+     */
     void killProcessSafely(boost::process::pid_t pid)
     {
         try
         {
+            logger.log("Terminating process with ID: " + std::to_string(pid));
             // Create a child object representing the process
             boost::process::child process_child(pid);
 
             // Terminate the process
             process_child.terminate();
+            logger.log("Process terminated successfully.");
 
             // Wait for the process to exit
             std::chrono::seconds timeout(5);
             auto exit_code = process_child.exit_code();
+            logger.log("Process exited with code: " + std::to_string(exit_code));
             if (!exit_code)
             {
                 // If process is not terminated within 5 seconds, send SIGKILL to it
                 ::kill(pid, SIGKILL);
+                logger.log("Process killed successfully.");
             }
         }
         catch (const std::exception &exception)
@@ -43,10 +75,11 @@ private:
         }
     }
 
-public:
-    ProcessManager() = default;
-    ~ProcessManager() = default;
-
+    /**
+     * @brief Starts a process with the given application path.
+     * The behavior depends on the operating system.
+     * @param application_path The path to the application to start.
+     */
     void startProcess(const std::string &application_path)
     {
 #ifdef OS_WINDOWS
@@ -60,16 +93,23 @@ public:
 #endif
     }
 
-#ifdef _WIN32
-    // Windows implementation
+    /**
+     * @brief Retrieves the process ID of a process with the given name.
+     * The behavior depends on the operating system.
+     * @param processName The name of the process.
+     * @return The process ID if found, 0 otherwise.
+     * @throws std::runtime_error if failed to retrieve the process ID.
+     */
     boost::process::pid_t getProcessIdByName(const std::string &processName)
     {
+#ifdef OS_WINDOWS
         boost::process::pid_t processId = 0;
         try
         {
+            logger.log("Getting process ID by name: " + processName);
             // Windows-specific command to get process ID by name
             std::string command = "tasklist /FI \"IMAGENAME eq " + processName + "\" /NH /FO CSV";
-
+            logger.log("Executing command: " + command);
             // Execute command and get output
             std::string output;
             boost::process::ipstream pipe;
@@ -82,6 +122,7 @@ public:
             size_t end = output.find_first_of(",", start) - 1;
             std::string pid_str = output.substr(start, end - start);
             processId = std::stoi(pid_str);
+            logger.log("Process ID: " + std::to_string(processId));
         }
         catch (const std::exception &exception)
         {
@@ -89,15 +130,12 @@ public:
         }
 
         return processId;
-    }
-#else
-#include <signal.h>
-    // POSIX-compliant (Linux, macOS, etc.) implementation
-    boost::process::pid_t getProcessIdByName(const std::string &processName)
-    {
+
+#elif defined(OS_MACOS) || defined(OS_LINUX)
         boost::process::pid_t processId = 0;
         try
         {
+            logger.log("Getting process ID by name: " + processName);
             // POSIX-specific command to get process ID by name
             std::string command = "pgrep " + processName;
 
@@ -112,6 +150,7 @@ public:
                 processId = std::stoi(pid_str);
             else
                 processId = 0;
+            logger.log("Process ID: " + std::to_string(processId));
         }
         catch (const std::exception &exception)
         {
@@ -120,14 +159,21 @@ public:
 
         // Convert output to integer process ID
         return processId;
-    }
 #endif
+    }
 
+    /**
+     * @brief Executes a process with the given process ID.
+     * The process is terminated safely and its exit code is checked.
+     * @param pid The process ID to execute.
+     * @return true if the process was executed successfully, false otherwise.
+     * @throws std::runtime_error if failed to terminate the process.
+     */
     bool executeProcess(boost::process::pid_t pid)
     {
         try
         {
-            std::cout << "Process ID: " << pid << " found successfully." << std::endl;
+            logger.log("Executing process with ID: " + std::to_string(pid));
             boost::process::child process_child(pid);
             // kill the process safely and check permissions
             this->killProcessSafely(pid);
