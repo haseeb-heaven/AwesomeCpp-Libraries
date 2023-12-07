@@ -17,6 +17,32 @@
 
 class ProcessManager
 {
+private:
+    void killProcessSafely(boost::process::pid_t pid)
+    {
+        try
+        {
+            // Create a child object representing the process
+            boost::process::child process_child(pid);
+
+            // Terminate the process
+            process_child.terminate();
+
+            // Wait for the process to exit
+            std::chrono::seconds timeout(5);
+            auto exit_code = process_child.exit_code();
+            if (!exit_code)
+            {
+                // If process is not terminated within 5 seconds, send SIGKILL to it
+                ::kill(pid, SIGKILL);
+            }
+        }
+        catch (const std::exception &exception)
+        {
+            throw std::runtime_error("Failed to terminate process: " + std::string(exception.what()));
+        }
+    }
+
 public:
     ProcessManager() = default;
     ~ProcessManager() = default;
@@ -97,31 +123,6 @@ public:
     }
 #endif
 
-    void killProcessSafely(boost::process::pid_t pid)
-    {
-        try
-        {
-            // Create a child object representing the process
-            boost::process::child process_child(pid);
-
-            // Terminate the process
-            process_child.terminate();
-
-            // Wait for the process to exit
-            std::chrono::seconds timeout(5);
-            auto exit_code = process_child.exit_code();
-            if (!exit_code)
-            {
-                // If process is not terminated within 5 seconds, send SIGKILL to it
-                ::kill(pid, SIGKILL);
-            }
-        }
-        catch (const std::exception &exception)
-        {
-            throw std::runtime_error("Failed to terminate process: " + std::string(exception.what()));
-        }
-    }
-
     bool executeProcess(boost::process::pid_t pid)
     {
         try
@@ -129,7 +130,7 @@ public:
             std::cout << "Process ID: " << pid << " found successfully." << std::endl;
             boost::process::child process_child(pid);
             // kill the process safely and check permissions
-            killProcessSafely(pid);
+            this->killProcessSafely(pid);
             return true;
         }
         catch (const std::exception &exception)
