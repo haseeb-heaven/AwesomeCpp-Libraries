@@ -4,6 +4,7 @@
 - **DataConvertor**: Convert various data types. 🔄
 - **DataParser**: Parse data from strings (JSON, CSV, etc.). 📝
 - **HttpClient**: Send HTTP requests with GET, POST, PUT, and DELETE methods. 🌐
+- **ProcessManager**: Manage processes for all major OS (Create,Terminate,etc). 📊
 - **EventHandlingSystem**: Manage and dispatch events. 🎉
 - **FileManager**: Perform CRUD operations on files with robust error handling. 📁
 - **FileSystemWatcher**: Monitor file system changes. 🔍
@@ -61,6 +62,10 @@ Configure each module as needed. Refer to individual header files for module-spe
 ### FileParser Module
 - **[FileParser.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/FileParser.hpp)**
   - 📝 Parses data for various applications for (JSON,CSV,XML) and more.
+
+### ProcessManager Module
+- **[ProcessManager.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/ProcessManager.hpp)**
+  - 📊 Manages processes within the all major operating systems (Windows, Linux, MacOS).
 
 ### EventHandlingSystem Module
 - **[EventHandlingSystem.hpp](https://github.com/haseeb-heaven/AwesomeCpp-Libraries/blob/main/libs/EventHandlingSystem.hpp)**
